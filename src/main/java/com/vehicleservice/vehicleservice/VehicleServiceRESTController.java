@@ -3,8 +3,16 @@ package com.vehicleservice.vehicleservice;
 import com.vehicleservice.vehicleservice.dataservices.VehicleDataService;
 import com.vehicleservice.vehicleservice.models.database.Store;
 import com.vehicleservice.vehicleservice.models.database.Vehicle;
+import com.vehicleservice.vehicleservice.models.dto.RentDTO;
+import com.vehicleservice.vehicleservice.models.dto.VehicleDTO;
+import com.vehicleservice.vehicleservice.models.dto.VehicleStateDTO;
+import com.vehicleservice.vehicleservice.models.resource.CustomerResource;
+import com.vehicleservice.vehicleservice.models.resource.StateResource;
+import com.vehicleservice.vehicleservice.models.resource.StoreResource;
+import com.vehicleservice.vehicleservice.models.resource.VehicleResource;
 import com.vehicleservice.vehicleservice.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,60 +26,28 @@ public class VehicleServiceRESTController {
     @Autowired
     private VehicleDataService vehicleDataService;
 
-
-    @Autowired
-    private AddressRepository addressRepository;
-
-    @Autowired
-    private BonusRepository bonusRepository;
-
-    @Autowired
-    private CustomerRepository customerRepository;
-
-    @Autowired
-    private EmployeeRepository employeeRepository;
-
-    @Autowired
-    private PartnerWorkshopRepository partnerWorkshopRepository;
-
-    @Autowired
-    private ProducerRepository producerRepository;
-
-    @Autowired
-    private ProducerPartnerWorkshopRepository producerPartnerWorkshopRepository;
-
-    @Autowired
-    private RentedVehicleRepository rentedVehicleRepository;
-
-    @Autowired
-    private RepairingRepository repairingRepository;
-
-    @Autowired
-    private StoreRepository storeRepository;
-
-    @Autowired
-    private VehicleRepository vehicleRepository;
-
-    @Autowired
-    private VehicleTypeRepository vehicleTypeRepository;
-
-
     @RequestMapping(value = "/stores", method = RequestMethod.GET)
-    public List<Store> readStores(){
+    public List<StoreResource> readStores(){
         return vehicleDataService.readStores();
     }
 
     @RequestMapping(value = "/vehicles", method = RequestMethod.GET)
-    public List<Vehicle> readVehicles() {
-        return vehicleDataService.readVehicles();
+    public List<VehicleResource> readVehicles(@RequestBody VehicleDTO vehicleDTO) {
+        return vehicleDataService.readVehicles(vehicleDTO);
     }
 
-//    GET: alle Filialen
-//    GET: alle Fahrzeuge (state: verfügbar, nicht verfügbar, wartung)
-//    GET: Fahrzeuge (type: PKW, LKW, Motorrad)
-//    POST/PUT/GET???: Mieten Kunde, Fahrzeug, Mitarbeiter, Datum(von-bis))
-//    PUT: Status des Fahrzeuges ändern
-//    PUT: zurückgeben
-//    GET: für Anmeldung
+    @RequestMapping(value = "/customers", method = RequestMethod.GET)
+    public List<CustomerResource> readCustomers() {
+        return vehicleDataService.readCustomers();
+    }
 
+    @RequestMapping(value = "/manage-rent", method = RequestMethod.POST)
+    public StateResource createRent(@RequestBody RentDTO rentDTO) {
+        return vehicleDataService.createRent(rentDTO);
+    }
+
+    @RequestMapping(value = "/vehicle-state", method = RequestMethod.PUT)
+    public StateResource updateVehicleState(@RequestBody VehicleStateDTO vehicleStateDTO) {
+        return vehicleDataService.updateVehicleState(vehicleStateDTO);
+    }
 }

@@ -1,6 +1,7 @@
 package com.vehicleservice.vehicleservice.models.database;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "store", catalog = "vehicleservice")
@@ -10,8 +11,17 @@ public class Store {
     @Column(name = "store_id")
     private Integer storeID;
 
-    @Column(name = "store_name")
-    private String storeName;
+    @Column(name = "store_name", nullable = false)
+    private String name;
+
+    @OneToMany(mappedBy = "store")
+    private Set<Employee> employees;
+
+    @OneToMany(mappedBy = "store")
+    private Set<RentedVehicle> rentedVehicles;
+
+    @OneToMany(mappedBy = "store")
+    private Set<Vehicle> vehicles;
 
     public Store() {
     }
@@ -24,11 +34,35 @@ public class Store {
         this.storeID = storeID;
     }
 
-    public String getStoreName() {
-        return storeName;
+    public String getName() {
+        return name;
     }
 
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public Set<RentedVehicle> getRentedVehicles() {
+        return rentedVehicles;
+    }
+
+    public void setRentedVehicles(Set<RentedVehicle> rentedVehicles) {
+        this.rentedVehicles = rentedVehicles;
+    }
+
+    public Set<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(Set<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 }
