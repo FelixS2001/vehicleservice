@@ -1,8 +1,8 @@
 package com.vehicleservice.vehicleservice.dataservices;
 
 import com.vehicleservice.vehicleservice.managers.VehicleDataManager;
+import com.vehicleservice.vehicleservice.models.database.Customer;
 import com.vehicleservice.vehicleservice.models.database.Store;
-import com.vehicleservice.vehicleservice.models.database.Vehicle;
 import com.vehicleservice.vehicleservice.models.dto.RentDTO;
 import com.vehicleservice.vehicleservice.models.dto.VehicleDTO;
 import com.vehicleservice.vehicleservice.models.dto.VehicleStateDTO;
@@ -26,47 +26,26 @@ public class VehicleDataService {
     public List<StoreResource> readStores() {
         List<StoreResource> storeResources = new ArrayList<>();
 
-        for (Store s : vehicleDataManager.readStores()) {
-            storeResources.add(convertEntryToResource(s));
-        }
+        vehicleDataManager.readStores()
+                .forEach(store -> storeResources.add(convertEntryToResource(store)));
 
         return storeResources;
     }
 
-    public List<VehicleResource> readVehicles(VehicleDTO vehicleDTO)
-    {
-        List<VehicleResource> vehicleResources = new ArrayList<>();
-
-        final String ALL = "all";
-        final String AVAILABLE = "available";
-        final String UNAVAILABLE = "unavailable";
-        final String MAINTENANCE = "maintenance";
-
-        final String CAR = "car";
-        final String TRUCK = "truck";
-        final String BIKE = "bike";
-
-        String state = vehicleDTO.getState();
-        String type = vehicleDTO.getType();
-        if((state != null) && (state == ALL || state == AVAILABLE || state == UNAVAILABLE || state == MAINTENANCE)
-            && (type != null) && (type == ALL || type == CAR || type == TRUCK || type == BIKE))
-        {
-
-            for(Vehicle v : vehicleDataManager.readVehicles(state, type)){
-                vehicleResources.add(convertEntryToResource(v));
-            }
-        }
-
-
-        return vehicleResources;
-    }
-
-    public List<CustomerResource> readCustomers() {
+    public List<VehicleResource> readVehicles(VehicleDTO vehicleDTO) {
         return null;
     }
 
+    public List<CustomerResource> readCustomers() {
+        List<CustomerResource> customerResources = new ArrayList<>();
+
+        vehicleDataManager.readCustomers()
+                .forEach(customer -> customerResources.add(convertEntryToResource(customer)));
+
+        return customerResources;
+    }
+
     public StateResource createRent(RentDTO rentDTO) {
-        vehicleDataManager.addRent(rentDTO);
         return null;
     }
 
@@ -82,17 +61,15 @@ public class VehicleDataService {
         return storeResource;
     }
 
-    private VehicleResource convertEntryToResource(Vehicle vehicle) {
-        VehicleResource vehicleResource = new VehicleResource();
+    private CustomerResource convertEntryToResource(Customer customer) {
+        CustomerResource customerResource = new CustomerResource();
 
-        vehicleResource.setVehicle_id(vehicle.getVehicleID());
-        vehicleResource.setVehicleName(vehicle.getName());
-        vehicleResource.setCarSerialNumber(vehicle.getSerialNumber());
-        vehicleResource.setVehicleTypeId(vehicle.getVehicleType().getVehicleTypeID());
-        vehicleResource.setVehicleProducerId(vehicle.getProducer().getProducerID());
-        vehicleResource.setBelongingStoreId(vehicle.getStore().getStoreID());
-        vehicleResource.setVehiclePower(vehicle.getPower());
+        customerResource.setCustomerID(customer.getCustomerID());
+        customerResource.setFirstName(customer.getFirstName());
+        customerResource.setLastName(customer.getLastName());
+        customerResource.setStreet(customer.getAddress().getStreet());
+        customerResource.setZipcode(customer.getAddress().getZipcode());
 
-        return vehicleResource;
+        return customerResource;
     }
 }

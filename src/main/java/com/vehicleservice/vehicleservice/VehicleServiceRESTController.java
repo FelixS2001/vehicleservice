@@ -41,13 +41,12 @@ public class VehicleServiceRESTController {
         return vehicleDataService.readCustomers();
     }
 
-    @RequestMapping(value = "/manage-rent", method = RequestMethod.POST)
-    public StateResource createRent(@RequestBody RentDTO rentDTO)
-    {
+    @RequestMapping(value = "/rent", method = RequestMethod.POST)
+    public StateResource createRent(@RequestBody RentDTO rentDTO) {
         return vehicleDataService.createRent(rentDTO);
     }
 
-    @RequestMapping(value = "/vehicle-state", method = RequestMethod.PUT)
+    @RequestMapping(value = "/state", method = RequestMethod.PUT)
     public StateResource updateVehicleState(@RequestBody VehicleStateDTO vehicleStateDTO) {
         return vehicleDataService.updateVehicleState(vehicleStateDTO);
     }
