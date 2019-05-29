@@ -42,7 +42,8 @@ public class VehicleServiceRESTController {
     }
 
     @RequestMapping(value = "/manage-rent", method = RequestMethod.POST)
-    public StateResource createRent(@RequestBody RentDTO rentDTO) {
+    public StateResource createRent(@RequestBody RentDTO rentDTO)
+    {
         return vehicleDataService.createRent(rentDTO);
     }
 
