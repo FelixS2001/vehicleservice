@@ -1,5 +1,6 @@
 package com.vehicleservice.vehicleservice.managers;
 
+import com.vehicleservice.vehicleservice.models.database.Customer;
 import com.vehicleservice.vehicleservice.models.database.Store;
 import com.vehicleservice.vehicleservice.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,9 @@ public class VehicleDataManager {
 
     public List<Store> readStores() {
         return storeRepository.findAll();
+    }
+
+    public List<Customer> readCustomers() {
+        return customerRepository.findAll();
     }
 }

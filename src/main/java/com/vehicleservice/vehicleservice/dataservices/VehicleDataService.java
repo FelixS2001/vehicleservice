@@ -1,6 +1,7 @@
 package com.vehicleservice.vehicleservice.dataservices;
 
 import com.vehicleservice.vehicleservice.managers.VehicleDataManager;
+import com.vehicleservice.vehicleservice.models.database.Customer;
 import com.vehicleservice.vehicleservice.models.database.Store;
 import com.vehicleservice.vehicleservice.models.dto.RentDTO;
 import com.vehicleservice.vehicleservice.models.dto.VehicleDTO;
@@ -25,9 +26,8 @@ public class VehicleDataService {
     public List<StoreResource> readStores() {
         List<StoreResource> storeResources = new ArrayList<>();
 
-        for (Store s : vehicleDataManager.readStores()) {
-            storeResources.add(convertEntryToResource(s));
-        }
+        vehicleDataManager.readStores()
+                .forEach(store -> storeResources.add(convertEntryToResource(store)));
 
         return storeResources;
     }
@@ -37,7 +37,12 @@ public class VehicleDataService {
     }
 
     public List<CustomerResource> readCustomers() {
-        return null;
+        List<CustomerResource> customerResources = new ArrayList<>();
+
+        vehicleDataManager.readCustomers()
+                .forEach(customer -> customerResources.add(convertEntryToResource(customer)));
+
+        return customerResources;
     }
 
     public StateResource createRent(RentDTO rentDTO) {
@@ -54,5 +59,17 @@ public class VehicleDataService {
         storeResource.setName(store.getName());
 
         return storeResource;
+    }
+
+    private CustomerResource convertEntryToResource(Customer customer) {
+        CustomerResource customerResource = new CustomerResource();
+
+        customerResource.setCustomerID(customer.getCustomerID());
+        customerResource.setFirstName(customer.getFirstName());
+        customerResource.setLastName(customer.getLastName());
+        customerResource.setStreet(customer.getAddress().getStreet());
+        customerResource.setZipcode(customer.getAddress().getZipcode());
+
+        return customerResource;
     }
 }
