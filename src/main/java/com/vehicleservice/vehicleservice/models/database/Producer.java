@@ -15,7 +15,7 @@ public class Producer {
     @Column(name = "producer_name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "producer")
+    @OneToMany(mappedBy = "producer", fetch = FetchType.LAZY)
     private Set<Vehicle> vehicles;
 
     public Producer() {

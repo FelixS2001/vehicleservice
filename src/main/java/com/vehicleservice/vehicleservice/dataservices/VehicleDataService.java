@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class VehicleDataService {
@@ -33,6 +32,7 @@ public class VehicleDataService {
     }
 
     public List<VehicleResource> readVehicles(VehicleDTO vehicleDTO) {
+        vehicleDataManager.readVehicles();
         return null;
     }
 
@@ -46,13 +46,16 @@ public class VehicleDataService {
     }
 
     public StateResource createRent(RentDTO rentDTO) {
+        vehicleDataManager.createRent();
         return null;
     }
 
     public StateResource updateVehicleState(VehicleStateDTO vehicleStateDTO) {
+        vehicleDataManager.updateVehicleState();
         return null;
     }
 
+    //Converters
     private StoreResource convertEntryToResource(Store store) {
         StoreResource storeResource = new StoreResource();
 

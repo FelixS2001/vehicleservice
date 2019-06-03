@@ -1,21 +1,24 @@
 package com.vehicleservice.vehicleservice.models.resource;
 
-public class  VehicleResource {
+public class VehicleResource {
 
-    private Integer vehicle_id;
+    private Integer vehicleID;
     private String vehicleName;
-    private Integer carSerialNumber;
-    private Integer vehicleTypeId;
-    private Integer vehicleProducerId;
-    private Integer belongingStoreId;
+    private String carSerialNumber;
+    private Integer vehicleTypeID;
+    private Integer vehicleProducerID;
+    private Integer belongingStoreID;
     private Integer vehiclePower;
 
-    public Integer getVehicle_id() {
-        return vehicle_id;
+    public VehicleResource() {
     }
 
-    public void setVehicle_id(Integer vehicle_id) {
-        this.vehicle_id = vehicle_id;
+    public Integer getVehicleID() {
+        return vehicleID;
+    }
+
+    public void setVehicleID(Integer vehicleID) {
+        this.vehicleID = vehicleID;
     }
 
     public String getVehicleName() {
@@ -26,36 +29,36 @@ public class  VehicleResource {
         this.vehicleName = vehicleName;
     }
 
-    public Integer getCarSerialNumber() {
+    public String getCarSerialNumber() {
         return carSerialNumber;
     }
 
-    public void setCarSerialNumber(Integer carSerialNumber) {
+    public void setCarSerialNumber(String carSerialNumber) {
         this.carSerialNumber = carSerialNumber;
     }
 
-    public Integer getVehicleTypeId() {
-        return vehicleTypeId;
+    public Integer getVehicleTypeID() {
+        return vehicleTypeID;
     }
 
-    public void setVehicleTypeId(Integer vehicleTypeId) {
-        this.vehicleTypeId = vehicleTypeId;
+    public void setVehicleTypeID(Integer vehicleTypeID) {
+        this.vehicleTypeID = vehicleTypeID;
     }
 
-    public Integer getVehicleProducerId() {
-        return vehicleProducerId;
+    public Integer getVehicleProducerID() {
+        return vehicleProducerID;
     }
 
-    public void setVehicleProducerId(Integer vehicleProducerId) {
-        this.vehicleProducerId = vehicleProducerId;
+    public void setVehicleProducerID(Integer vehicleProducerID) {
+        this.vehicleProducerID = vehicleProducerID;
     }
 
-    public Integer getBelongingStoreId() {
-        return belongingStoreId;
+    public Integer getBelongingStoreID() {
+        return belongingStoreID;
     }
 
-    public void setBelongingStoreId(Integer belongingStoreId) {
-        this.belongingStoreId = belongingStoreId;
+    public void setBelongingStoreID(Integer belongingStoreID) {
+        this.belongingStoreID = belongingStoreID;
     }
 
     public Integer getVehiclePower() {

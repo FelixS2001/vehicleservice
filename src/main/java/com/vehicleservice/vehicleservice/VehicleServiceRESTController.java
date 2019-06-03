@@ -1,8 +1,6 @@
 package com.vehicleservice.vehicleservice;
 
 import com.vehicleservice.vehicleservice.dataservices.VehicleDataService;
-import com.vehicleservice.vehicleservice.models.database.Store;
-import com.vehicleservice.vehicleservice.models.database.Vehicle;
 import com.vehicleservice.vehicleservice.models.dto.RentDTO;
 import com.vehicleservice.vehicleservice.models.dto.VehicleDTO;
 import com.vehicleservice.vehicleservice.models.dto.VehicleStateDTO;
@@ -10,7 +8,6 @@ import com.vehicleservice.vehicleservice.models.resource.CustomerResource;
 import com.vehicleservice.vehicleservice.models.resource.StateResource;
 import com.vehicleservice.vehicleservice.models.resource.StoreResource;
 import com.vehicleservice.vehicleservice.models.resource.VehicleResource;
-import com.vehicleservice.vehicleservice.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +24,7 @@ public class VehicleServiceRESTController {
     private VehicleDataService vehicleDataService;
 
     @RequestMapping(value = "/stores", method = RequestMethod.GET)
-    public List<StoreResource> readStores(){
+    public List<StoreResource> readStores() {
         return vehicleDataService.readStores();
     }
 

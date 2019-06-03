@@ -15,7 +15,7 @@ public class PartnerWorkshop {
     @Column(name = "partner_workshop_name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "partnerWorkshop")
+    @OneToMany(mappedBy = "partnerWorkshop", fetch = FetchType.LAZY)
     private Set<Repairing> repairings;
 
     public PartnerWorkshop() {

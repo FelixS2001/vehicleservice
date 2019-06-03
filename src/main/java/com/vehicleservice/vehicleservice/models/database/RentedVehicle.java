@@ -18,15 +18,15 @@ public class RentedVehicle {
     @Column(name = "end_date", nullable = false)
     private Date endDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "rented_vehicle_id", referencedColumnName = "vehicle_id")
     private Vehicle vehicle;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "rented_store_id", referencedColumnName = "store_id")
     private Store store;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "rented_customer_id", referencedColumnName = "customer_id")
     private Customer customer;
 

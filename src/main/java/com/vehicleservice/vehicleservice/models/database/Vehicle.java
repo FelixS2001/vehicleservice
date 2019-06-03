@@ -16,27 +16,27 @@ public class Vehicle {
     private String name;
 
     @Column(name = "car_serial_number", nullable = false)
-    private Integer serialNumber;
+    private String serialNumber;
 
     @Column(name = "vehicle_power", nullable = false)
     private Integer power;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicle_type_id", referencedColumnName = "vehicle_type_id")
     private VehicleType vehicleType;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicle_producer_id", referencedColumnName = "producer_id")
     private Producer producer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "belonging_store_id", referencedColumnName = "store_id")
     private Store store;
 
-    @OneToMany(mappedBy = "vehicle")
+    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY)
     private Set<RentedVehicle> rentedVehicles;
 
-    @OneToMany(mappedBy = "vehicle")
+    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY)
     private Set<Repairing> repairs;
 
     public Vehicle() {
@@ -58,11 +58,11 @@ public class Vehicle {
         this.name = name;
     }
 
-    public Integer getSerialNumber() {
+    public String getSerialNumber() {
         return serialNumber;
     }
 
-    public void setSerialNumber(Integer serialNumber) {
+    public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
     }
 

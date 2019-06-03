@@ -14,7 +14,7 @@ public class VehicleType {
     @Column(name = "vehicle_type_name", nullable = false)
     private String name;
 
-    @OneToOne(mappedBy = "vehicleType")
+    @OneToOne(mappedBy = "vehicleType", fetch = FetchType.LAZY)
     private Vehicle vehicle;
 
     public VehicleType() {

@@ -29,7 +29,7 @@ public class Employee {
     @Column(name = "password")
     private String password;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_store_id", referencedColumnName = "store_id")
     private Store store;
 

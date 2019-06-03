@@ -18,11 +18,11 @@ public class Repairing {
     @Column(name = "repairing_description")
     private String description;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "repairing_partner_workshop_id", referencedColumnName = "partner_workshop_id")
     private PartnerWorkshop partnerWorkshop;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "repairing_vehicle_id", referencedColumnName = "vehicle_id")
     private Vehicle vehicle;
 

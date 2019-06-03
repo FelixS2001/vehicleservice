@@ -1,8 +1,13 @@
 package com.vehicleservice.vehicleservice.managers;
 
 import com.vehicleservice.vehicleservice.models.database.Customer;
+import com.vehicleservice.vehicleservice.models.database.RentedVehicle;
 import com.vehicleservice.vehicleservice.models.database.Store;
-import com.vehicleservice.vehicleservice.repositories.*;
+import com.vehicleservice.vehicleservice.models.database.Vehicle;
+import com.vehicleservice.vehicleservice.repositories.CustomerRepository;
+import com.vehicleservice.vehicleservice.repositories.RentedVehicleRepository;
+import com.vehicleservice.vehicleservice.repositories.StoreRepository;
+import com.vehicleservice.vehicleservice.repositories.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,25 +17,10 @@ import java.util.List;
 public class VehicleDataManager {
 
     @Autowired
-    private AddressRepository addressRepository;
-
-    @Autowired
     private CustomerRepository customerRepository;
 
     @Autowired
-    private EmployeeRepository employeeRepository;
-
-    @Autowired
-    private PartnerWorkshopRepository partnerWorkshopRepository;
-
-    @Autowired
-    private ProducerRepository producerRepository;
-
-    @Autowired
     private RentedVehicleRepository rentedVehicleRepository;
-
-    @Autowired
-    private RepairingRepository repairingRepository;
 
     @Autowired
     private StoreRepository storeRepository;
@@ -38,14 +28,24 @@ public class VehicleDataManager {
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    @Autowired
-    private VehicleTypeRepository vehicleTypeRepository;
 
     public List<Store> readStores() {
         return storeRepository.findAll();
     }
 
+    public List<Vehicle> readVehicles() {
+        return vehicleRepository.findAll(); //placeholder
+    }
+
     public List<Customer> readCustomers() {
         return customerRepository.findAll();
+    }
+
+    public RentedVehicle createRent() {
+        return rentedVehicleRepository.findAll().get(0); //placeholder
+    }
+
+    public Vehicle updateVehicleState() {
+        return vehicleRepository.findAll().get(0); //placeholder
     }
 }

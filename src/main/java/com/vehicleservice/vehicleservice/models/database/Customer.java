@@ -22,11 +22,11 @@ public class Customer {
     @Column(name = "customer_phone_number")
     private Integer phoneNumber;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_address_id", referencedColumnName = "address_id")
     private Address address;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
     private Set<RentedVehicle> rentedVehicles;
 
     public Customer() {

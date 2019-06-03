@@ -14,13 +14,13 @@ public class Store {
     @Column(name = "store_name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Set<Employee> employees;
 
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Set<RentedVehicle> rentedVehicles;
 
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Set<Vehicle> vehicles;
 
     public Store() {
