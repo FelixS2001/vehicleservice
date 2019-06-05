@@ -32,6 +32,10 @@ public class VehicleDataManager {
         return storeRepository.findAll();
     }
 
+    public List<Vehicle> readAllVehicles() {
+        return vehicleRepository.findAll();
+    }
+
     public List<Vehicle> readVehicles(String state) {
         return vehicleRepository.findByVehicleStateName(state); //placeholder
     }
