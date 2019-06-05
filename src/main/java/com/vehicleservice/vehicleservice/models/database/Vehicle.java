@@ -25,6 +25,10 @@ public class Vehicle {
     @JoinColumn(name = "vehicle_type_id", referencedColumnName = "vehicle_type_id")
     private VehicleType vehicleType;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "vehicle_state_id", referencedColumnName = "vehicle_state_id")
+    private VehicleState vehicleState;
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "vehicle_producer_id", referencedColumnName = "producer_id")
     private Producer producer;

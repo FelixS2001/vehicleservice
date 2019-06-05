@@ -3,6 +3,7 @@ package com.vehicleservice.vehicleservice.dataservices;
 import com.vehicleservice.vehicleservice.managers.VehicleDataManager;
 import com.vehicleservice.vehicleservice.models.database.Customer;
 import com.vehicleservice.vehicleservice.models.database.Store;
+import com.vehicleservice.vehicleservice.models.database.Vehicle;
 import com.vehicleservice.vehicleservice.models.dto.RentDTO;
 import com.vehicleservice.vehicleservice.models.dto.VehicleDTO;
 import com.vehicleservice.vehicleservice.models.dto.VehicleStateDTO;
@@ -31,9 +32,13 @@ public class VehicleDataService {
         return storeResources;
     }
 
-    public List<VehicleResource> readVehicles(VehicleDTO vehicleDTO) {
-        vehicleDataManager.readVehicles();
-        return null;
+    public List<VehicleResource> readVehicles(String state) {
+        List<VehicleResource> vehicleResources = new ArrayList<>();
+
+        vehicleDataManager.readVehicles(state)
+            .forEach(vehicle -> vehicleResources.add(convertEntryToResource(vehicle)));
+
+        return vehicleResources;
     }
 
     public List<CustomerResource> readCustomers() {
@@ -74,5 +79,21 @@ public class VehicleDataService {
         customerResource.setZipcode(customer.getAddress().getZipcode());
 
         return customerResource;
+    }
+
+    private VehicleResource convertEntryToResource(Vehicle vehicle) {
+        VehicleResource vehicleResource = new VehicleResource();
+
+        vehicleResource.setVehicleID(vehicle.getVehicleID());
+        vehicleResource.setVehicleName(vehicle.getName());
+        vehicleResource.setCarSerialNumber(vehicle.getSerialNumber());
+        vehicleResource.setVehicleTypeID(vehicle.getVehicleType().getVehicleTypeID());
+        vehicleResource.setVehicleTypeName(vehicle.getVehicleType().getName());
+        vehicleResource.setVehicleProducerID(vehicle.getProducer().getProducerID());
+        vehicleResource.setVehicleProducerName(vehicle.getProducer().getName());
+        vehicleResource.setBelongingStoreID(vehicle.getStore().getStoreID());
+        vehicleResource.setVehiclePower(vehicle.getPower());
+
+        return vehicleResource;
     }
 }

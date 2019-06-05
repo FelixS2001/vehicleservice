@@ -9,15 +9,13 @@ import com.vehicleservice.vehicleservice.models.resource.StateResource;
 import com.vehicleservice.vehicleservice.models.resource.StoreResource;
 import com.vehicleservice.vehicleservice.models.resource.VehicleResource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/vehicleservice")
+@CrossOrigin
 public class VehicleServiceRESTController {
 
     @Autowired
@@ -28,9 +26,9 @@ public class VehicleServiceRESTController {
         return vehicleDataService.readStores();
     }
 
-    @RequestMapping(value = "/vehicles", method = RequestMethod.GET)
-    public List<VehicleResource> readVehicles(@RequestBody VehicleDTO vehicleDTO) {
-        return vehicleDataService.readVehicles(vehicleDTO);
+    @RequestMapping(value = "/vehicles/{state}", method = RequestMethod.GET)
+    public List<VehicleResource> readVehicles(@PathVariable("state") String state) {
+        return vehicleDataService.readVehicles(state);
     }
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)

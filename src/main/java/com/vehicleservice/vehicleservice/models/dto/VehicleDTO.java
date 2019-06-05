@@ -1,26 +1,28 @@
 package com.vehicleservice.vehicleservice.models.dto;
 
+import java.util.List;
+
 public class VehicleDTO {
 
-    private String state;
-    private String type;
+    private List<String> states;
+    private List<String> types;
 
     public VehicleDTO() {
     }
 
-    public String getState() {
-        return state;
+    public List<String> getStates() {
+        return states;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setStates(List<String> states) {
+        this.states = states;
     }
 
-    public String getType() {
-        return type;
+    public List<String> getTypes() {
+        return types;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypes(List<String> types) {
+        this.types = types;
     }
 }

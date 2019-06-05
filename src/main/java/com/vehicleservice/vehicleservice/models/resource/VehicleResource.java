@@ -6,7 +6,9 @@ public class VehicleResource {
     private String vehicleName;
     private String carSerialNumber;
     private Integer vehicleTypeID;
+    private String vehicleTypeName;
     private Integer vehicleProducerID;
+    private String vehicleProducerName;
     private Integer belongingStoreID;
     private Integer vehiclePower;
 
@@ -45,12 +47,28 @@ public class VehicleResource {
         this.vehicleTypeID = vehicleTypeID;
     }
 
+    public String getVehicleTypeName() {
+        return vehicleTypeName;
+    }
+
+    public void setVehicleTypeName(String vehicleTypeName) {
+        this.vehicleTypeName = vehicleTypeName;
+    }
+
     public Integer getVehicleProducerID() {
         return vehicleProducerID;
     }
 
     public void setVehicleProducerID(Integer vehicleProducerID) {
         this.vehicleProducerID = vehicleProducerID;
+    }
+
+    public String getVehicleProducerName() {
+        return vehicleProducerName;
+    }
+
+    public void setVehicleProducerName(String vehicleProducerName) {
+        this.vehicleProducerName = vehicleProducerName;
     }
 
     public Integer getBelongingStoreID() {
