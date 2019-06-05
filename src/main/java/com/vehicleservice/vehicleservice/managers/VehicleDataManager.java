@@ -6,6 +6,7 @@ import com.vehicleservice.vehicleservice.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -39,21 +40,21 @@ public class VehicleDataManager {
         return customerRepository.findAll();
     }
 
-    public RentedVehicle createRent(RentDTO rentDTO) {
+    public RentedVehicle createRent(int customerID, int vehicleID, int employeeID, Date startDate, Date endDate ) {
 
-        Customer customer = customerRepository.findById(rentDTO.getCustomerID()).get();
+        Customer customer = customerRepository.findById(customerID).get();
 
-        Vehicle vehicle = vehicleRepository.findById(rentDTO.getVehicleID()).get();
+        Vehicle vehicle = vehicleRepository.findById(vehicleID).get();
 
-        Employee employee = employeeRepository.findById(rentDTO.getEmployeeID()).get();
+        Employee employee = employeeRepository.findById(employeeID).get();
 
         RentedVehicle rentedVehicle = new RentedVehicle();
         rentedVehicle.setVehicle(vehicle);
         rentedVehicle.setCustomer(customer);
         rentedVehicle.setEmployee(employee);
         rentedVehicle.setStore(vehicle.getStore());
-        rentedVehicle.setStartDate(rentDTO.getStartDate());
-        rentedVehicle.setEndDate(rentDTO.getEndDate());
+        rentedVehicle.setStartDate(startDate);
+        rentedVehicle.setEndDate(endDate);
 
         rentedVehicleRepository.save(rentedVehicle);
 

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -47,7 +48,7 @@ public class VehicleDataService {
     }
 
     public StateResource createRent(RentDTO rentDTO) {
-        vehicleDataManager.createRent(rentDTO);
+        vehicleDataManager.createRent(rentDTO.getCustomerID(), rentDTO.getVehicleID(),rentDTO.getEmployeeID(), rentDTO.getStartDate(),rentDTO.getEndDate());
         StateResource resource = new StateResource(100, "OK");
         return resource;
     }
