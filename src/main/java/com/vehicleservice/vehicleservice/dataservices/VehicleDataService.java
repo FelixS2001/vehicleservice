@@ -2,6 +2,7 @@ package com.vehicleservice.vehicleservice.dataservices;
 
 import com.vehicleservice.vehicleservice.managers.VehicleDataManager;
 import com.vehicleservice.vehicleservice.models.database.Customer;
+import com.vehicleservice.vehicleservice.models.database.RentedVehicle;
 import com.vehicleservice.vehicleservice.models.database.Store;
 import com.vehicleservice.vehicleservice.models.database.Vehicle;
 import com.vehicleservice.vehicleservice.models.dto.RentDTO;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -51,8 +53,9 @@ public class VehicleDataService {
     }
 
     public StateResource createRent(RentDTO rentDTO) {
-        vehicleDataManager.createRent();
-        return null;
+        vehicleDataManager.createRent(rentDTO.getCustomerID(), rentDTO.getVehicleID(),rentDTO.getEmployeeID(), rentDTO.getStartDate(),rentDTO.getEndDate());
+        StateResource resource = new StateResource(100, "OK");
+        return resource;
     }
 
     public StateResource updateVehicleState(VehicleStateDTO vehicleStateDTO) {

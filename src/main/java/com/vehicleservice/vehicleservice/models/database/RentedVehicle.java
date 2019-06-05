@@ -27,6 +27,10 @@ public class RentedVehicle {
     private Store store;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "rented_employee_id", referencedColumnName = "employee_id")
+    private Employee employee;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "rented_customer_id", referencedColumnName = "customer_id")
     private Customer customer;
 
@@ -79,5 +83,13 @@ public class RentedVehicle {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
