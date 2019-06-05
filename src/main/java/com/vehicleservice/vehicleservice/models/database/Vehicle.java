@@ -29,7 +29,7 @@ public class Vehicle {
     @JoinColumn(name = "vehicle_producer_id", referencedColumnName = "producer_id")
     private Producer producer;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "belonging_store_id", referencedColumnName = "store_id")
     private Store store;
 

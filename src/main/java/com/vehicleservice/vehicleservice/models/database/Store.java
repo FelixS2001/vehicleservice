@@ -17,10 +17,10 @@ public class Store {
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Set<Employee> employees;
 
-    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
     private Set<RentedVehicle> rentedVehicles;
 
-    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
     private Set<Vehicle> vehicles;
 
     public Store() {

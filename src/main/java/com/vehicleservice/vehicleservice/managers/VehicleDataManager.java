@@ -1,13 +1,8 @@
 package com.vehicleservice.vehicleservice.managers;
 
-import com.vehicleservice.vehicleservice.models.database.Customer;
-import com.vehicleservice.vehicleservice.models.database.RentedVehicle;
-import com.vehicleservice.vehicleservice.models.database.Store;
-import com.vehicleservice.vehicleservice.models.database.Vehicle;
-import com.vehicleservice.vehicleservice.repositories.CustomerRepository;
-import com.vehicleservice.vehicleservice.repositories.RentedVehicleRepository;
-import com.vehicleservice.vehicleservice.repositories.StoreRepository;
-import com.vehicleservice.vehicleservice.repositories.VehicleRepository;
+import com.vehicleservice.vehicleservice.models.database.*;
+import com.vehicleservice.vehicleservice.models.dto.RentDTO;
+import com.vehicleservice.vehicleservice.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +23,9 @@ public class VehicleDataManager {
     @Autowired
     private VehicleRepository vehicleRepository;
 
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
 
     public List<Store> readStores() {
         return storeRepository.findAll();
@@ -41,8 +39,25 @@ public class VehicleDataManager {
         return customerRepository.findAll();
     }
 
-    public RentedVehicle createRent() {
-        return rentedVehicleRepository.findAll().get(0); //placeholder
+    public RentedVehicle createRent(RentDTO rentDTO) {
+
+        Customer customer = customerRepository.findById(rentDTO.getCustomerID()).get();
+
+        Vehicle vehicle = vehicleRepository.findById(rentDTO.getVehicleID()).get();
+
+        Employee employee = employeeRepository.findById(rentDTO.getEmployeeID()).get();
+
+        RentedVehicle rentedVehicle = new RentedVehicle();
+        rentedVehicle.setVehicle(vehicle);
+        rentedVehicle.setCustomer(customer);
+        rentedVehicle.setEmployee(employee);
+        rentedVehicle.setStore(vehicle.getStore());
+        rentedVehicle.setStartDate(rentDTO.getStartDate());
+        rentedVehicle.setEndDate(rentDTO.getEndDate());
+
+        rentedVehicleRepository.save(rentedVehicle);
+
+        return rentedVehicle; //placeholder
     }
 
     public Vehicle updateVehicleState() {

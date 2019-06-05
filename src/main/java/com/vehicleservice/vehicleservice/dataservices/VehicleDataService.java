@@ -2,6 +2,7 @@ package com.vehicleservice.vehicleservice.dataservices;
 
 import com.vehicleservice.vehicleservice.managers.VehicleDataManager;
 import com.vehicleservice.vehicleservice.models.database.Customer;
+import com.vehicleservice.vehicleservice.models.database.RentedVehicle;
 import com.vehicleservice.vehicleservice.models.database.Store;
 import com.vehicleservice.vehicleservice.models.dto.RentDTO;
 import com.vehicleservice.vehicleservice.models.dto.VehicleDTO;
@@ -46,8 +47,9 @@ public class VehicleDataService {
     }
 
     public StateResource createRent(RentDTO rentDTO) {
-        vehicleDataManager.createRent();
-        return null;
+        vehicleDataManager.createRent(rentDTO);
+        StateResource resource = new StateResource(100, "OK");
+        return resource;
     }
 
     public StateResource updateVehicleState(VehicleStateDTO vehicleStateDTO) {
