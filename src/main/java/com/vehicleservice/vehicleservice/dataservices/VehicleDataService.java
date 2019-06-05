@@ -34,6 +34,15 @@ public class VehicleDataService {
         return storeResources;
     }
 
+    public List<VehicleResource> readAllVehicles() {
+        List<VehicleResource> vehicleResources = new ArrayList<>();
+
+        vehicleDataManager.readAllVehicles()
+                .forEach(vehicle -> vehicleResources.add(convertEntryToResource(vehicle)));
+
+        return vehicleResources;
+    }
+
     public List<VehicleResource> readVehicles(String state) {
         List<VehicleResource> vehicleResources = new ArrayList<>();
 
@@ -110,4 +119,6 @@ public class VehicleDataService {
 
         return vehicleResource;
     }
+
+
 }
