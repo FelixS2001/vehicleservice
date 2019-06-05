@@ -27,6 +27,10 @@ public class VehicleDataManager {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private VehicleStateRepository vehicleStateRepository;
+
+    private final String STATE_UNAVAILABLE = "unavailable";
 
     public List<Store> readStores() {
         return storeRepository.findAll();
@@ -45,6 +49,8 @@ public class VehicleDataManager {
         Customer customer = customerRepository.findById(customerID).get();
 
         Vehicle vehicle = vehicleRepository.findById(vehicleID).get();
+        VehicleState vehicleState = vehicleStateRepository.findByName(STATE_UNAVAILABLE);
+        vehicle.setVehicleState(vehicleState);
 
         Employee employee = employeeRepository.findById(employeeID).get();
 
@@ -61,7 +67,15 @@ public class VehicleDataManager {
         return rentedVehicle; //placeholder
     }
 
-    public Vehicle updateVehicleState() {
-        return vehicleRepository.findAll().get(0); //placeholder
+    public Vehicle updateVehicleState(Integer vehicleID, String stateName) {
+
+        Vehicle vehicle  = vehicleRepository.findById(vehicleID).get();
+        VehicleState vehicleState = vehicleStateRepository.findByName(stateName);
+
+
+        vehicle.setVehicleState(vehicleState);
+        vehicleStateRepository.save(vehicleState);
+
+        return vehicle; //placeholder
     }
 }

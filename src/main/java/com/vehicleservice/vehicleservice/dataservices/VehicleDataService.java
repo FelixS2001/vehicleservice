@@ -53,14 +53,25 @@ public class VehicleDataService {
     }
 
     public StateResource createRent(RentDTO rentDTO) {
-        vehicleDataManager.createRent(rentDTO.getCustomerID(), rentDTO.getVehicleID(),rentDTO.getEmployeeID(), rentDTO.getStartDate(),rentDTO.getEndDate());
-        StateResource resource = new StateResource(100, "OK");
-        return resource;
+        try {
+            vehicleDataManager.createRent(rentDTO.getCustomerID(), rentDTO.getVehicleID(), rentDTO.getEmployeeID(), rentDTO.getStartDate(), rentDTO.getEndDate());
+            StateResource resource = new StateResource(200, "OK");
+            return resource;
+        }catch (Exception e){
+            StateResource resource = new StateResource(500, "Internal Error");
+            return resource;
+        }
     }
 
     public StateResource updateVehicleState(VehicleStateDTO vehicleStateDTO) {
-        vehicleDataManager.updateVehicleState();
-        return null;
+        try {
+            vehicleDataManager.updateVehicleState(vehicleStateDTO.getVehicleID(), vehicleStateDTO.getState());
+            StateResource resource = new StateResource(200, "OK");
+            return resource;
+        }catch(Exception e){
+            StateResource resource = new StateResource(500, "Internal Error");
+            return resource;
+        }
     }
 
     //Converters

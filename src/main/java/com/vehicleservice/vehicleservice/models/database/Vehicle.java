@@ -117,4 +117,12 @@ public class Vehicle {
     public void setRepairs(Set<Repairing> repairs) {
         this.repairs = repairs;
     }
+
+    public VehicleState getVehicleState() {
+        return vehicleState;
+    }
+
+    public void setVehicleState(VehicleState vehicleState) {
+        this.vehicleState = vehicleState;
+    }
 }
