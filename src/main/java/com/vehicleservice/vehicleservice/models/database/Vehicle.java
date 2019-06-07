@@ -8,7 +8,7 @@ import java.util.Set;
 public class Vehicle {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vehicle_id")
     private Integer vehicleID;
 
@@ -33,7 +33,7 @@ public class Vehicle {
     @JoinColumn(name = "vehicle_producer_id", referencedColumnName = "producer_id")
     private Producer producer;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "belonging_store_id", referencedColumnName = "store_id")
     private Store store;
 

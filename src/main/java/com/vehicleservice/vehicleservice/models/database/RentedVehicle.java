@@ -8,7 +8,7 @@ import java.util.Date;
 public class RentedVehicle {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rented_id")
     private Integer rentedVehicleID;
 

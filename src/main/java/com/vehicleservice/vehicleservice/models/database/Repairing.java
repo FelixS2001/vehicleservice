@@ -8,7 +8,7 @@ import java.util.Date;
 public class Repairing {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "repairing_id")
     private Integer repairingID;
 

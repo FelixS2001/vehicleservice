@@ -1,21 +1,22 @@
 package com.vehicleservice.vehicleservice.models.database;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "vehicle_state", catalog = "vehicleservice")
 public class VehicleState {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vehicle_state_id")
     private Integer vehicleStateID;
 
     @Column(name = "state_name ", nullable = false)
     private String name;
 
-    @OneToOne(mappedBy = "vehicleState", fetch = FetchType.LAZY)
-    private Vehicle vehicle;
+    @OneToMany(mappedBy = "vehicleState", fetch = FetchType.LAZY)
+    private Set<Vehicle> vehicles;
 
     public VehicleState() {
     }
@@ -36,11 +37,11 @@ public class VehicleState {
         this.name = name;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
+    public Set<Vehicle> getVehicles() {
+        return vehicles;
     }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
+    public void setVehicles(Set<Vehicle> vehicles) {
+        this.vehicles = vehicles;
     }
 }

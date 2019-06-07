@@ -2,7 +2,6 @@ package com.vehicleservice.vehicleservice;
 
 import com.vehicleservice.vehicleservice.dataservices.VehicleDataService;
 import com.vehicleservice.vehicleservice.models.dto.RentDTO;
-import com.vehicleservice.vehicleservice.models.dto.VehicleDTO;
 import com.vehicleservice.vehicleservice.models.dto.VehicleStateDTO;
 import com.vehicleservice.vehicleservice.models.resource.CustomerResource;
 import com.vehicleservice.vehicleservice.models.resource.StateResource;

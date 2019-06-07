@@ -8,6 +8,7 @@ import java.util.Set;
 public class Store {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "store_id")
     private Integer storeID;
 
@@ -17,10 +18,10 @@ public class Store {
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Set<Employee> employees;
 
-    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Set<RentedVehicle> rentedVehicles;
 
-    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
     private Set<Vehicle> vehicles;
 
     public Store() {

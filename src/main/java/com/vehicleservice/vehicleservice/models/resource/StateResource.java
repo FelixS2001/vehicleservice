@@ -6,13 +6,12 @@ public class StateResource {
     private String stateMessage;
 
 
-    public StateResource(Integer stateCode, String stateMessage){
+    public StateResource(Integer stateCode, String stateMessage) {
         this.stateCode = stateCode;
         this.stateMessage = stateMessage;
     }
 
-    public StateResource(){
-
+    public StateResource() {
     }
 
     public Integer getStateCode() {

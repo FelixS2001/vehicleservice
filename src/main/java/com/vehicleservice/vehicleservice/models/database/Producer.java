@@ -8,7 +8,7 @@ import java.util.Set;
 public class Producer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "producer_id")
     private Integer producerID;
 

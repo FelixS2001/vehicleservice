@@ -1,5 +1,6 @@
 package com.vehicleservice.vehicleservice.dataservices;
 
+import com.vehicleservice.vehicleservice.exceptions.InvalidBodyException;
 import com.vehicleservice.vehicleservice.managers.VehicleDataManager;
 import com.vehicleservice.vehicleservice.models.database.Customer;
 import com.vehicleservice.vehicleservice.models.database.RentedVehicle;
@@ -25,6 +26,11 @@ public class VehicleDataService {
     @Autowired
     private VehicleDataManager vehicleDataManager;
 
+    public static final String STATE_AVAILABLE = "available";
+    public static final String STATE_UNAVAILABLE = "unavailable";
+    public static final String STATE_MAINTENANCE = "maintenance";
+
+
     public List<StoreResource> readStores() {
         List<StoreResource> storeResources = new ArrayList<>();
 
@@ -44,10 +50,14 @@ public class VehicleDataService {
     }
 
     public List<VehicleResource> readVehicles(String state) {
+        if (!state.equals(STATE_AVAILABLE) && !state.equals(STATE_UNAVAILABLE) && !state.equals(STATE_MAINTENANCE)) {
+            throw new InvalidBodyException("The state " + state + " is invalid");
+        }
+
         List<VehicleResource> vehicleResources = new ArrayList<>();
 
         vehicleDataManager.readVehicles(state)
-            .forEach(vehicle -> vehicleResources.add(convertEntryToResource(vehicle)));
+                .forEach(vehicle -> vehicleResources.add(convertEntryToResource(vehicle)));
 
         return vehicleResources;
     }
@@ -64,22 +74,18 @@ public class VehicleDataService {
     public StateResource createRent(RentDTO rentDTO) {
         try {
             vehicleDataManager.createRent(rentDTO.getCustomerID(), rentDTO.getVehicleID(), rentDTO.getEmployeeID(), rentDTO.getStartDate(), rentDTO.getEndDate());
-            StateResource resource = new StateResource(200, "OK");
-            return resource;
-        }catch (Exception e){
-            StateResource resource = new StateResource(500, "Internal Error");
-            return resource;
+            return new StateResource(200, "OK");
+        } catch (Exception e) {
+            return new StateResource(500, "Internal Error");
         }
     }
 
     public StateResource updateVehicleState(VehicleStateDTO vehicleStateDTO) {
         try {
             vehicleDataManager.updateVehicleState(vehicleStateDTO.getVehicleID(), vehicleStateDTO.getState());
-            StateResource resource = new StateResource(200, "OK");
-            return resource;
-        }catch(Exception e){
-            StateResource resource = new StateResource(500, "Internal Error");
-            return resource;
+            return new StateResource(200, "OK");
+        } catch (Exception e) {
+            return new StateResource(500, "Internal Error");
         }
     }
 
@@ -119,6 +125,4 @@ public class VehicleDataService {
 
         return vehicleResource;
     }
-
-
 }

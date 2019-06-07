@@ -8,7 +8,7 @@ import java.util.Set;
 public class PartnerWorkshop {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "partner_workshop_id")
     private Integer partnerWorkshopID;
 

@@ -1,6 +1,6 @@
 package com.vehicleservice.vehicleservice.exceptions;
 
-public class InvalidBodyException extends Exception {
+public class InvalidBodyException extends RuntimeException {
 
     public InvalidBodyException(String s) {
         super(s);
