@@ -49,7 +49,6 @@ public class VehicleDataManager {
 
     public RentedVehicle createRent(int customerID, int vehicleID, int employeeID, Date startDate, Date endDate) {
         Customer customer = customerRepository.findById(customerID).get();
-        System.out.println("Street: " + customer.getAddress().getStreet());
         Vehicle vehicle = vehicleRepository.findById(vehicleID).get();
         VehicleState vehicleState = vehicleStateRepository.findByName(STATE_UNAVAILABLE);
         Employee employee = employeeRepository.findById(employeeID).get();

@@ -1,35 +1,32 @@
 package com.vehicleservice.vehicleservice.dataservices;
 
 import com.vehicleservice.vehicleservice.exceptions.InvalidBodyException;
+import com.vehicleservice.vehicleservice.exceptions.OperationFailedException;
 import com.vehicleservice.vehicleservice.managers.VehicleDataManager;
 import com.vehicleservice.vehicleservice.models.database.Customer;
-import com.vehicleservice.vehicleservice.models.database.RentedVehicle;
 import com.vehicleservice.vehicleservice.models.database.Store;
 import com.vehicleservice.vehicleservice.models.database.Vehicle;
-import com.vehicleservice.vehicleservice.models.dto.RentDTO;
-import com.vehicleservice.vehicleservice.models.dto.VehicleDTO;
-import com.vehicleservice.vehicleservice.models.dto.VehicleStateDTO;
-import com.vehicleservice.vehicleservice.models.resource.CustomerResource;
-import com.vehicleservice.vehicleservice.models.resource.StateResource;
-import com.vehicleservice.vehicleservice.models.resource.StoreResource;
-import com.vehicleservice.vehicleservice.models.resource.VehicleResource;
+import com.vehicleservice.vehicleservice.models.dtos.RentDTO;
+import com.vehicleservice.vehicleservice.models.dtos.VehicleStateDTO;
+import com.vehicleservice.vehicleservice.models.resources.CustomerResource;
+import com.vehicleservice.vehicleservice.models.resources.StateResource;
+import com.vehicleservice.vehicleservice.models.resources.StoreResource;
+import com.vehicleservice.vehicleservice.models.resources.VehicleResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Component
 public class VehicleDataService {
 
-    @Autowired
-    private VehicleDataManager vehicleDataManager;
-
     public static final String STATE_AVAILABLE = "available";
     public static final String STATE_UNAVAILABLE = "unavailable";
     public static final String STATE_MAINTENANCE = "maintenance";
 
+    @Autowired
+    private VehicleDataManager vehicleDataManager;
 
     public List<StoreResource> readStores() {
         List<StoreResource> storeResources = new ArrayList<>();
@@ -50,9 +47,7 @@ public class VehicleDataService {
     }
 
     public List<VehicleResource> readVehicles(String state) {
-        if (!state.equals(STATE_AVAILABLE) && !state.equals(STATE_UNAVAILABLE) && !state.equals(STATE_MAINTENANCE)) {
-            throw new InvalidBodyException("The state " + state + " is invalid");
-        }
+        checkState(state);
 
         List<VehicleResource> vehicleResources = new ArrayList<>();
 
@@ -72,20 +67,52 @@ public class VehicleDataService {
     }
 
     public StateResource createRent(RentDTO rentDTO) {
+        checkDTO(rentDTO);
+
         try {
-            vehicleDataManager.createRent(rentDTO.getCustomerID(), rentDTO.getVehicleID(), rentDTO.getEmployeeID(), rentDTO.getStartDate(), rentDTO.getEndDate());
-            return new StateResource(200, "OK");
+            vehicleDataManager.createRent(rentDTO.getCustomerID(), rentDTO.getVehicleID(), rentDTO.getEmployeeID(),
+                    rentDTO.getStartDate(), rentDTO.getEndDate());
+            return new StateResource(200, "Rent was created successfully");
         } catch (Exception e) {
-            return new StateResource(500, "Internal Error");
+            throw new OperationFailedException(String.format("Rent could not be created. %s",
+                    e.getMessage()));
         }
     }
 
     public StateResource updateVehicleState(VehicleStateDTO vehicleStateDTO) {
+        checkDTO(vehicleStateDTO);
+        checkState(vehicleStateDTO.getState());
+
         try {
             vehicleDataManager.updateVehicleState(vehicleStateDTO.getVehicleID(), vehicleStateDTO.getState());
-            return new StateResource(200, "OK");
+            return new StateResource(200, "State was updated successfully");
         } catch (Exception e) {
-            return new StateResource(500, "Internal Error");
+            throw new OperationFailedException(String.format("tate could not be updated. %s",
+                    e.getMessage()));
+        }
+    }
+
+    //Checkers
+    private void checkState(String state) {
+        if (!state.equals(STATE_AVAILABLE) && !state.equals(STATE_UNAVAILABLE) && !state.equals(STATE_MAINTENANCE)) {
+            throw new InvalidBodyException(String.format("The state %s is invalid", state));
+        }
+    }
+
+    private void checkDTO(RentDTO rentDTO) {
+        if (rentDTO.getCustomerID() == null ||
+                rentDTO.getVehicleID() == null ||
+                rentDTO.getEmployeeID() == null ||
+                rentDTO.getStartDate() == null ||
+                rentDTO.getEndDate() == null) {
+            throw new InvalidBodyException("The object must not contain null values");
+        }
+    }
+
+    private void checkDTO(VehicleStateDTO vehicleStateDTO) {
+        if (vehicleStateDTO.getVehicleID() == null ||
+                vehicleStateDTO.getState() == null) {
+            throw new InvalidBodyException("The object must not contain null values");
         }
     }
 

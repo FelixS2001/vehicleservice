@@ -1,4 +1,4 @@
-package com.vehicleservice.vehicleservice.models.dto;
+package com.vehicleservice.vehicleservice.models.dtos;
 
 public class VehicleStateDTO {
 

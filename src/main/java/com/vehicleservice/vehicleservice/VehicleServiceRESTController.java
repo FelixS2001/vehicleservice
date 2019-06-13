@@ -1,12 +1,12 @@
 package com.vehicleservice.vehicleservice;
 
 import com.vehicleservice.vehicleservice.dataservices.VehicleDataService;
-import com.vehicleservice.vehicleservice.models.dto.RentDTO;
-import com.vehicleservice.vehicleservice.models.dto.VehicleStateDTO;
-import com.vehicleservice.vehicleservice.models.resource.CustomerResource;
-import com.vehicleservice.vehicleservice.models.resource.StateResource;
-import com.vehicleservice.vehicleservice.models.resource.StoreResource;
-import com.vehicleservice.vehicleservice.models.resource.VehicleResource;
+import com.vehicleservice.vehicleservice.models.dtos.RentDTO;
+import com.vehicleservice.vehicleservice.models.dtos.VehicleStateDTO;
+import com.vehicleservice.vehicleservice.models.resources.CustomerResource;
+import com.vehicleservice.vehicleservice.models.resources.StateResource;
+import com.vehicleservice.vehicleservice.models.resources.StoreResource;
+import com.vehicleservice.vehicleservice.models.resources.VehicleResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

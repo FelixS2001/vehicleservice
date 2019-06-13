@@ -1,4 +1,4 @@
-package com.vehicleservice.vehicleservice.models.resource;
+package com.vehicleservice.vehicleservice.models.resources;
 
 public class VehicleResource {
 

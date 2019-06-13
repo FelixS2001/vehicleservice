@@ -1,10 +1,9 @@
-package com.vehicleservice.vehicleservice.models.resource;
+package com.vehicleservice.vehicleservice.models.resources;
 
 public class StateResource {
 
     private Integer stateCode;
     private String stateMessage;
-
 
     public StateResource(Integer stateCode, String stateMessage) {
         this.stateCode = stateCode;
