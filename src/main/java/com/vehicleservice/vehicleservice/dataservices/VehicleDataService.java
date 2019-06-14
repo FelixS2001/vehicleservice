@@ -87,7 +87,7 @@ public class VehicleDataService {
             vehicleDataManager.updateVehicleState(vehicleStateDTO.getVehicleID(), vehicleStateDTO.getState());
             return new StateResource(200, "State was updated successfully");
         } catch (Exception e) {
-            throw new OperationFailedException(String.format("tate could not be updated. %s",
+            throw new OperationFailedException(String.format("State could not be updated. %s",
                     e.getMessage()));
         }
     }
