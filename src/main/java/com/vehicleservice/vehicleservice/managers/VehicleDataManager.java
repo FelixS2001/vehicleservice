@@ -1,6 +1,7 @@
 package com.vehicleservice.vehicleservice.managers;
 
 import com.vehicleservice.vehicleservice.models.database.*;
+import com.vehicleservice.vehicleservice.models.resources.VehicleResource;
 import com.vehicleservice.vehicleservice.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -41,6 +42,10 @@ public class VehicleDataManager {
 
     public List<Vehicle> readVehicles(String state) {
         return vehicleRepository.findByVehicleStateName(state);
+    }
+
+    public Vehicle readVehicle(int vehicleID) {
+        return vehicleRepository.findById(vehicleID).get();
     }
 
     public List<Customer> readCustomers() {

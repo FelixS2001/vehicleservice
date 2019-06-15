@@ -57,6 +57,10 @@ public class VehicleDataService {
         return vehicleResources;
     }
 
+    public VehicleResource readVehicle(int vehicleID) {
+        return convertEntryToResource(vehicleDataManager.readVehicle(vehicleID));
+    }
+
     public List<CustomerResource> readCustomers() {
         List<CustomerResource> customerResources = new ArrayList<>();
 
