@@ -4,14 +4,12 @@ import com.vehicleservice.vehicleservice.exceptions.InvalidBodyException;
 import com.vehicleservice.vehicleservice.exceptions.OperationFailedException;
 import com.vehicleservice.vehicleservice.managers.VehicleDataManager;
 import com.vehicleservice.vehicleservice.models.database.Customer;
+import com.vehicleservice.vehicleservice.models.database.Employee;
 import com.vehicleservice.vehicleservice.models.database.Store;
 import com.vehicleservice.vehicleservice.models.database.Vehicle;
 import com.vehicleservice.vehicleservice.models.dtos.RentDTO;
 import com.vehicleservice.vehicleservice.models.dtos.VehicleStateDTO;
-import com.vehicleservice.vehicleservice.models.resources.CustomerResource;
-import com.vehicleservice.vehicleservice.models.resources.StateResource;
-import com.vehicleservice.vehicleservice.models.resources.StoreResource;
-import com.vehicleservice.vehicleservice.models.resources.VehicleResource;
+import com.vehicleservice.vehicleservice.models.resources.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +33,10 @@ public class VehicleDataService {
                 .forEach(store -> storeResources.add(convertEntryToResource(store)));
 
         return storeResources;
+    }
+
+    public StoreResource readStore(int storeID) {
+        return convertEntryToResource(vehicleDataManager.readStore(storeID));
     }
 
     public List<VehicleResource> readAllVehicles() {
@@ -68,6 +70,15 @@ public class VehicleDataService {
                 .forEach(customer -> customerResources.add(convertEntryToResource(customer)));
 
         return customerResources;
+    }
+
+    public CustomerResource readCustomer(int customerID) {
+        return convertEntryToResource(vehicleDataManager.readCustomer(customerID));
+    }
+
+    public EmployeeResource readEmployee(String userName, String password) {
+        checkParams(userName, password);
+        return convertEntryToResource(vehicleDataManager.readEmployee(userName, password));
     }
 
     public StateResource createRent(RentDTO rentDTO) {
@@ -120,6 +131,12 @@ public class VehicleDataService {
         }
     }
 
+    private void checkParams(String userName, String password) {
+        if (userName == null || password == null) {
+            throw new InvalidBodyException("The parameters must not contain null values");
+        }
+    }
+
     //Converters
     private StoreResource convertEntryToResource(Store store) {
         StoreResource storeResource = new StoreResource();
@@ -155,5 +172,17 @@ public class VehicleDataService {
         vehicleResource.setVehiclePower(vehicle.getPower());
 
         return vehicleResource;
+    }
+
+    private EmployeeResource convertEntryToResource(Employee employee) {
+        EmployeeResource employeeResource = new EmployeeResource();
+
+        employeeResource.setEmployeeID(employee.getEmployeeID());
+        employeeResource.setFirstName(employee.getFirstName());
+        employeeResource.setLastName(employee.getLastName());
+        employeeResource.setSocialInsuranceNumber(employee.getSocialInsuranceNumber());
+        employeeResource.setHireDate(employee.getHireDate());
+
+        return employeeResource;
     }
 }

@@ -36,6 +36,10 @@ public class VehicleDataManager {
         return storeRepository.findAll();
     }
 
+    public Store readStore(int storeID) {
+        return storeRepository.findById(storeID).get();
+    }
+
     public List<Vehicle> readAllVehicles() {
         return vehicleRepository.findAll();
     }
@@ -50,6 +54,14 @@ public class VehicleDataManager {
 
     public List<Customer> readCustomers() {
         return customerRepository.findAll();
+    }
+
+    public Customer readCustomer(int customerID) {
+        return customerRepository.findById(customerID).get();
+    }
+
+    public Employee readEmployee(String userName, String password) {
+        return employeeRepository.findByUserNameAndPassword(userName, password);
     }
 
     public RentedVehicle createRent(int customerID, int vehicleID, int employeeID, Date startDate, Date endDate) {

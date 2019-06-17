@@ -3,10 +3,7 @@ package com.vehicleservice.vehicleservice;
 import com.vehicleservice.vehicleservice.dataservices.VehicleDataService;
 import com.vehicleservice.vehicleservice.models.dtos.RentDTO;
 import com.vehicleservice.vehicleservice.models.dtos.VehicleStateDTO;
-import com.vehicleservice.vehicleservice.models.resources.CustomerResource;
-import com.vehicleservice.vehicleservice.models.resources.StateResource;
-import com.vehicleservice.vehicleservice.models.resources.StoreResource;
-import com.vehicleservice.vehicleservice.models.resources.VehicleResource;
+import com.vehicleservice.vehicleservice.models.resources.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +20,11 @@ public class VehicleServiceRESTController {
     @RequestMapping(value = "/stores", method = RequestMethod.GET)
     public List<StoreResource> readStores() {
         return vehicleDataService.readStores();
+    }
+
+    @RequestMapping(value = "/stores/{storeID}", method = RequestMethod.GET)
+    public StoreResource readStore(@PathVariable int storeID) {
+        return vehicleDataService.readStore(storeID);
     }
 
     @RequestMapping(value = "/vehicles", method = RequestMethod.GET)
@@ -43,6 +45,16 @@ public class VehicleServiceRESTController {
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public List<CustomerResource> readCustomers() {
         return vehicleDataService.readCustomers();
+    }
+
+    @RequestMapping(value = "/customers/{customerID}", method = RequestMethod.GET)
+    public CustomerResource readCustomer(@PathVariable int customerID) {
+        return vehicleDataService.readCustomer(customerID);
+    }
+
+    @RequestMapping(value = "/employees", method = RequestMethod.GET)
+    public EmployeeResource readEmployee(@RequestParam String userName, @RequestParam String password) {
+        return vehicleDataService.readEmployee(userName, password);
     }
 
     @RequestMapping(value = "/rent", method = RequestMethod.POST)
