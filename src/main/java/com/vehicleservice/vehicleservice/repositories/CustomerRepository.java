@@ -6,4 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+
+    Customer findByLastNameContainingIgnoreCase(String lastName);
 }

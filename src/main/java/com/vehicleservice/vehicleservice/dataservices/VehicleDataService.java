@@ -72,7 +72,7 @@ public class VehicleDataService {
         return customerResources;
     }
 
-    public CustomerResource readCustomer(int customerID) {
+    public CustomerResource readCustomer(String customerID) {
         return convertEntryToResource(vehicleDataManager.readCustomer(customerID));
     }
 

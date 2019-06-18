@@ -56,8 +56,8 @@ public class VehicleDataManager {
         return customerRepository.findAll();
     }
 
-    public Customer readCustomer(int customerID) {
-        return customerRepository.findById(customerID).get();
+    public Customer readCustomer(String lastName) {
+        return customerRepository.findByLastNameContainingIgnoreCase(lastName);
     }
 
     public Employee readEmployee(String userName, String password) {

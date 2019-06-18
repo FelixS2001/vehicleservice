@@ -47,9 +47,9 @@ public class VehicleServiceRESTController {
         return vehicleDataService.readCustomers();
     }
 
-    @RequestMapping(value = "/customers/{customerID}", method = RequestMethod.GET)
-    public CustomerResource readCustomer(@PathVariable int customerID) {
-        return vehicleDataService.readCustomer(customerID);
+    @RequestMapping(value = "/customers/{lastName}", method = RequestMethod.GET)
+    public CustomerResource readCustomer(@PathVariable String lastName) {
+        return vehicleDataService.readCustomer(lastName);
     }
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
