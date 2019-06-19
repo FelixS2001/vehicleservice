@@ -48,12 +48,21 @@ public class VehicleDataService {
         return vehicleResources;
     }
 
-    public List<VehicleResource> readVehicles(String state) {
+    public List<VehicleResource> readVehiclesByState(String state) {
         checkState(state);
 
         List<VehicleResource> vehicleResources = new ArrayList<>();
 
-        vehicleDataManager.readVehicles(state)
+        vehicleDataManager.readVehiclesByState(state)
+                .forEach(vehicle -> vehicleResources.add(convertEntryToResource(vehicle)));
+
+        return vehicleResources;
+    }
+
+    public List<VehicleResource> readVehiclesByRent() {
+        List<VehicleResource> vehicleResources = new ArrayList<>();
+
+        vehicleDataManager.readVehiclesByRent()
                 .forEach(vehicle -> vehicleResources.add(convertEntryToResource(vehicle)));
 
         return vehicleResources;

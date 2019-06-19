@@ -33,8 +33,13 @@ public class VehicleServiceRESTController {
     }
 
     @RequestMapping(value = "/vehicles/state/{state}", method = RequestMethod.GET)
-    public List<VehicleResource> readVehicles(@PathVariable("state") String state) {
-        return vehicleDataService.readVehicles(state);
+    public List<VehicleResource> readVehiclesByState(@PathVariable("state") String state) {
+        return vehicleDataService.readVehiclesByState(state);
+    }
+
+    @RequestMapping(value = "/vehicles/rent", method = RequestMethod.GET)
+    public List<VehicleResource> readVehiclesByRent() {
+        return vehicleDataService.readVehiclesByRent();
     }
 
     @RequestMapping(value = "/vehicles/{vehicleID}", method = RequestMethod.GET)
